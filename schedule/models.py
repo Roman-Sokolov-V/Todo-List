@@ -12,7 +12,7 @@ class Task(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
     deadline = models.DateTimeField(null=True, blank=True)
     is_done = models.BooleanField(default=False)
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name="tasks")
+    tag = models.ManyToManyField(Tag, related_name="tasks")
 
     class Meta:
         verbose_name_plural = "Tasks"
