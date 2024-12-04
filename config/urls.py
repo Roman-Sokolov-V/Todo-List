@@ -19,7 +19,7 @@ from django.urls import path, include
 
 from task.views import (
     TaskListView, TaskCreateView, TagListView, TagCreateView, TagUpdateView,
-    TagDeleteView, toggle_task_status
+    TagDeleteView, toggle_task_status, remove_tag, TaskUpdateView
 )
 
 urlpatterns = [
@@ -30,5 +30,9 @@ urlpatterns = [
     path("tags/create/", TagCreateView.as_view(), name="tag-create"),
     path("tags/<int:pk>/update/", TagUpdateView.as_view(), name="tag-update"),
     path("tags/<int:pk>/delete/", TagDeleteView.as_view(), name="tag-delete"),
-    path('task/<int:pk>/toggle/', toggle_task_status, name='task-toggle'),
+    path("task/<int:pk>/toggle/", toggle_task_status, name="task-toggle"),
+    path("task/<int:pk>/<int:tag_pk>", remove_tag,
+         name="remove-tag"),
+    path("task/<int:pk>/update/", TaskUpdateView.as_view(),
+         name="task-update-tag"),
 ]

@@ -4,12 +4,11 @@ from django.urls import reverse_lazy, reverse
 from django.shortcuts import get_object_or_404, redirect
 
 from task.models import Task, Tag
-from task.forms import TaskForm
+from task.forms import TaskForm, TaskUpdateTagForm
 
 
 class TaskListView(generic.ListView):
     model = Task
-    fields = "__all__"
 
 
 class TaskCreateView(generic.CreateView):
@@ -46,3 +45,17 @@ def toggle_task_status(request, pk):
     task.is_done = not task.is_done  # Перемикання статусу
     task.save()
     return redirect(reverse("home"))
+
+
+def remove_tag(request, pk, tag_pk):
+    task = get_object_or_404(Task, pk=pk)
+    tag_obj = get_object_or_404(Tag, pk=tag_pk)
+    task.tag.remove(tag_obj)
+    return redirect(reverse("home"))
+
+
+class TaskUpdateView(generic.DeleteView):
+    model = Task
+    form_class = TaskUpdateTagForm
+    template_name = "task/create_update_form.html"
+    success_url = reverse_lazy("home")

@@ -20,4 +20,5 @@ class Task(models.Model):
 
     class Meta:
         verbose_name_plural = "Tasks"
-        ordering = ["-deadline"]
+        ordering = ["is_done", "-datetime"] # за умовами завдання,
+        # хоча логічно б було ["is_done", "deadline", "-datetime"]
