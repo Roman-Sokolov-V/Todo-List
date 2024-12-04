@@ -17,8 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from task.views import (TaskListView, TaskCreateView, TagListView,
-                        TagCreateView, TagUpdateView, TagDeleteView, toggle_task_status)
+from task.views import (
+    TaskListView, TaskCreateView, TagListView, TagCreateView, TagUpdateView,
+    TagDeleteView, toggle_task_status
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
