@@ -6,16 +6,17 @@ from django.shortcuts import get_object_or_404, redirect
 from task.models import Task, Tag
 from task.forms import TaskForm
 
+
 class TaskListView(generic.ListView):
     model = Task
-    fields = '__all__'
+    fields = "__all__"
+
 
 class TaskCreateView(generic.CreateView):
     model = Task
     form_class = TaskForm
     template_name = "task/create_update_form.html"
     success_url = reverse_lazy("home")
-
 
 
 class TagListView(generic.ListView):
@@ -27,10 +28,12 @@ class TagCreateView(generic.CreateView):
     fields = "__all__"
     success_url = reverse_lazy("tags")
 
+
 class TagUpdateView(generic.UpdateView):
     model = Tag
     fields = "__all__"
     success_url = reverse_lazy("tags")
+
 
 class TagDeleteView(generic.DeleteView):
     model = Tag
